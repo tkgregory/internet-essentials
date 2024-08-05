@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            color: green;
+        }
+    </style>
+    <script type="text/javascript">
+        function transfer() {
+            document.getElementById("status").innerText = "✌️Cool man, thanks for the contribution!"
+            console.log("Transfer of $10 complete.")
+        }
+    </script>
+</head>
+
+<body>
+    <h1>🎸 Welcome to the webpage of Steve Stevenson music!</h1>
+    <h2>Keep the music flowing by sending him $10!</h2>
+
+    <form>
+        <input type="button" value="Transfer" onclick="transfer();" /><br />
+        <p id="status"></p>
+    </form>
+</body>
+
+</html>

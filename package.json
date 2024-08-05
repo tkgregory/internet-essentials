@@ -1,0 +1,14 @@
+{
+  "name": "clickjacking",
+  "scripts": {
+    "start-vulnerable": "concurrently \"node server-attacker.js\" \"node server-legitimate-vulnerable.js\"",
+    "start-secured": "concurrently \"node server-attacker.js\" \"node server-legitimate-secured.js\""
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "nocache": "^4.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
