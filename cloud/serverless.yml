@@ -1,0 +1,65 @@
+service: chailoversparadise
+frameworkVersion: '3'
+params:
+  default:
+    websiteBucketName: chailoversparadise-${sls:stage}-website
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  deploymentMethod: direct
+plugins:
+  - serverless-s3-sync
+custom:
+  s3Sync:
+    buckets:
+      - bucketName: ${param:websiteBucketName}
+        localDir: ./website
+        deleteRemoved: true
+resources:
+  Resources:
+    WebsiteBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${param:websiteBucketName}
+        WebsiteConfiguration:
+          IndexDocument: index.html
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: false
+          BlockPublicPolicy: false
+          IgnorePublicAcls: false
+          RestrictPublicBuckets: false
+    WebsiteBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: !Ref WebsiteBucket
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Action:
+                - s3:GetObject
+              Effect: Allow
+              Principal: '*'
+              Resource: !Sub 'arn:aws:s3:::${WebsiteBucket}/*'
+    CloudFrontDistribution:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          Enabled: true
+          DefaultCacheBehavior:
+            TargetOriginId: S3Origin
+            ViewerProtocolPolicy: redirect-to-https
+            CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad # CachingDisabled
+            OriginRequestPolicyId: 88a5eaf4-2fd4-4709-b370-b4c650ea3fcf # CORS-S3Origin
+            AllowedMethods:
+              - GET
+              - HEAD
+              - OPTIONS
+          Origins:
+          - Id: S3Origin
+            DomainName: !Select [1, !Split ["//", !GetAtt WebsiteBucket.WebsiteURL]]
+            CustomOriginConfig:
+              OriginProtocolPolicy: 'http-only'
+  Outputs:
+    WebsiteURL:
+      Value: !Sub 'https://${CloudFrontDistribution.DomainName}'
