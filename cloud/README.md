@@ -1,6 +1,13 @@
-Deploy an example static site to AWS.
+## Website deployment to AWS
 
-## Deploying the site
+Deploys an example static website to AWS.
+
+### Pre-requisites
+
+* AWS account ([sign up](https://aws.amazon.com/resources/create-account/))
+* Local AWS credentials (run `aws configure` to setup)
+
+### Deploying the site
 
 Install *Serverless Framework*.
 
@@ -12,6 +19,6 @@ Deploy to AWS.
 
 `sls deploy --verbose`
 
-## Viewing the site
+### Viewing the site
 
 Point a browser at *WebsiteURL* listed under *Stack Outputs*.

@@ -1,6 +1,12 @@
-Deploy a Docker swarm cluster to see how container orchestration frameworks ensure high availability.
+## Availability and Scalability Demo
 
-## Deploying the stack
+Deploy a Docker Swarm cluster to demo how container orchestration frameworks ensure high availability.
+
+### Prerequisites
+
+* Docker ([install](https://docs.docker.com/engine/install/))
+
+### Deploying the stack
 
 Initialise Docker Swarm.
 
@@ -10,25 +16,27 @@ Deploy the stack.
 
 `docker stack deploy -c docker-compose.yml hello-swarm`.
 
-Observe 2 running containers.
+View running containers.
 
 `docker ps`
 
-## Accessing the service
+Observe that there are two containers running.
+
+### Accessing the service
 
 Point a browser to http://localhost:80 to request a page from container A.
-Open an incognito browser window to the same URL to request a page from container B.
+Then, open an incognito browser window to the same URL to request a page from container B.
 Notice that *server name* is different.
 
-Traffic is routed like this because Docker Swarm uses a *round robin* algorithm.
+Traffic is routed like this because Docker Swarm uses a *round robin* load balancing algorithm.
 
-## Recovering from failure
+### Recovering from failure
 
-Select a container id.
+View running containers.
 
 `docker ps`
 
-Kill the container.
+Select a container and kill it.
 
 `docker kill <container-id>`
 
@@ -38,10 +46,10 @@ Observe Docker Swarm now reports 1/2 replicas.
 
 Wait until replicas reads 2/2 to verify recovery.
 
-## Scaling manually
+### Scaling manually
 
 Scale down to 1 replica or up to 3 replicas.
 
- `docker service scale hello-swarm_hello-world=<count>`
+ `docker service scale hello-swarm_hello-world=<replica count>`
 
-Browse http://localhost:80 and confirm that traffic is routed to the available replicas.
+Browse to http://localhost:80 and confirm that traffic is routed to all available replicas.

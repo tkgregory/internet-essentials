@@ -1,4 +1,8 @@
-## Clickjacking
+## Clickjacking demo
+
+Demonstrates an application that is vulnerable to the _clickjacking_ attack, then shows how you can secure the application against it.
+
+### Installing
 
 First run `npm install`
 
@@ -12,6 +16,6 @@ Click the "Redeem" button and observe money being transferred from your account 
 
 `npm run start-secure`
 
-Open the JavaScript Console and observe that the browser has blocked the iframe document from loading because of the headers.
+Open the JavaScript Console and observe that the browser has blocked the iframe document from loading thanks to the additional headers.
 
 
