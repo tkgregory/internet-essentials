@@ -12,7 +12,7 @@ Initialise Docker Swarm.
 
 `docker swarm init`
 
-Deploy the stack.
+Within this subdirectory, run this command to deploy the stack.
 
 `docker stack deploy -c docker-compose.yml hello-swarm`.
 
@@ -53,3 +53,9 @@ Scale down to 1 replica or up to 3 replicas.
  `docker service scale hello-swarm_hello-world=<replica count>`
 
 Browse to http://localhost:80 and confirm that traffic is routed to all available replicas.
+
+## Clean up
+
+Remove the Docker Swarm stack:
+
+`docker stack rm hello-swarm`
