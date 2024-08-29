@@ -15,10 +15,16 @@ Install *Serverless Framework*.
 
 (later versions require login)
 
-Deploy to AWS.
+Within this subdirectory, run this command to deploy to AWS.
 
 `sls deploy --verbose`
 
 ### Viewing the site
 
-Point a browser at *WebsiteURL* listed under *Stack Outputs*.
+Point a browser at the *WebsiteURL* listed under *Stack Outputs*.
+
+### Cleaning up
+
+Delete all the AWS resources created by this project (may take a few minutes):
+
+`sls remove`
