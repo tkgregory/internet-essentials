@@ -4,18 +4,20 @@ Demonstrates an application that is vulnerable to the _clickjacking_ attack, the
 
 ### Installing
 
-First run `npm install`
+Within this subdirectory, run `npm install`
 
 ### Vulnerable mode
 
 `npm run start-vulnerable`
 
-Click the "Redeem" button and observe money being transferred from your account in the JavaScript Console.
+Browse to http://localhost:8080/ and click the "Redeem" button.
+In the JavaScript Console, observe money being transferred from your account.
 
 ### Secured mode
 
-`npm run start-secure`
+`npm run start-secured`
 
-Open the JavaScript Console and observe that the browser has blocked the iframe document from loading thanks to the additional headers.
+Browse to http://localhost:8080/ and click the "Redeem" button.
+In the JavaScript Console, observe that the browser has blocked the iframe document from loading thanks to the additional headers.
 
 
